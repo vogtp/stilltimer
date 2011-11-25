@@ -92,7 +92,7 @@ public class TimeGraphView extends View {
 			sb.append(i);
 			double i2 = i;
 			float pos = (float) (i2 * HOUR_IN_MILLIES * minInPx);
-			canvas.drawText(sb.toString(), pos, lineSep, timeLabelPaint);
+			canvas.drawText(sb.toString(), pos + 1, lineSep, timeLabelPaint);
 			canvas.drawLine(pos, 0, pos, height, timePaint);
 		}
 
