@@ -129,7 +129,7 @@ public class TimerActivity extends Activity {
 				tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
 				Cursor timerCursor = managedQuery(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
 				if (timerCursor.moveToFirst()) {
-					tvLastBreast.setText(timerCursor.getString(StillTime.INDEX_BREAST));
+					tvLastBreast.setText(Formater.translatedBreast(this, timerCursor.getString(StillTime.INDEX_BREAST)));
 					long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
 					tvLastBreastTime.setText(Formater.timeElapsed(bt));
 				}

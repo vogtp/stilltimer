@@ -8,7 +8,7 @@
     <style name="styleTimeCount" parent="android:Widget.TextView">
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textSize">30dp</item>
-        <item name="android:paddingRight">25dp</item>
+        <item name="android:paddingRight">10dp</item>
         <item name="android:paddingLeft">5dp</item>
     </style>
     <style name="styleLastSession" parent="android:Widget.TextView">

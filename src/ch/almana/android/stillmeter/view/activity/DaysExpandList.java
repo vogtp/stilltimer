@@ -46,9 +46,9 @@ public class DaysExpandList extends ExpandableListActivity {
 					return true;
 				} else if (columnIndex == Session.INDEX_TOTAL_TIME) {
 					StringBuilder sb = new StringBuilder();
-					sb.append("Total: ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_TOTAL_TIME)));
-					sb.append("; Left: ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_BREAST_LEFT_TIME)));
-					sb.append("; Right: ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_BREAST_RIGHT_TIME)));
+					sb.append(getString(R.string.labelTotal)).append(": ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_TOTAL_TIME)));
+					sb.append("; ").append(getString(R.string.left)).append(": ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_BREAST_LEFT_TIME)));
+					sb.append("; ").append(getString(R.string.right)).append(": ").append(Formater.timeElapsed(cursor.getLong(Session.INDEX_BREAST_RIGHT_TIME)));
 
 					((TextView) view).setText(sb.toString());
 					return true;

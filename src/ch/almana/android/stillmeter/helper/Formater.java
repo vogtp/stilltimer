@@ -4,8 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.content.Context;
 import android.database.Cursor;
+import ch.almana.android.stillmeter.model.BreastModel.Position;
 import ch.almana.android.stillmeter.provider.db.DB.Session;
+import ch.almana.android.stilltimer.R;
 
 public class Formater {
 
@@ -44,5 +47,21 @@ public class Formater {
 		time.setTime(cursor.getLong(Session.INDEX_TIME_END));
 		sb.append(" - ").append(Formater.formatTime(time));
 		return sb.toString();
+	}
+
+	public static CharSequence translatedBreast(Context ctx, String string) {
+		String breast = "";
+		switch (Position.valueOf(string)) {
+		case left:
+			breast = ctx.getString(R.string.left);
+			break;
+		case right:
+			breast = ctx.getString(R.string.right);
+			break;
+		case none:
+			breast = ctx.getString(R.string.none);
+			break;
+		}
+		return breast;
 	}
 }

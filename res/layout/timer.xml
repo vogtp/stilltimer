@@ -116,8 +116,7 @@
                 android:id="@+id/tvLastSession"
                 style="@style/styleLastSession"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tvLastSession" />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow

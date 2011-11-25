@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Still Timer</string>
+    <string name="left">Links</string>
+    <string name="buLeftOn">Links Stillen</string>
+    <string name="right">Rechts</string>
+    <string name="buRightOn">Rechts Stillen</string>
+    <string name="labelTotal">Total</string>
+    <string name="labelLastSession">Letztes Mal</string>
+    <string name="none">nichts</string>
+    <string name="labelLastSessionDuration">Still Zeit</string>
+    <string name="labelLastBreast">Letzte Brust</string>
+    <string name="labellastBreastTime">Zeit an Brust</string>
+
+</resources>

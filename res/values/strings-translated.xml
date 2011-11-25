@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Still Timer</string>
+    <string name="left">Left</string>
+    <string name="buLeftOn">Feeding Left</string>
+    <string name="right">Right</string>
+    <string name="buRightOn">Feeding Right</string>
+    <string name="labelTotal">Total</string>
+    <string name="labelLastSession">Last Session</string>
+    <string name="none">none</string>
+    <string name="labelLastSessionDuration">Feed time</string>
+    <string name="labelLastBreast">Last breast</string>
+    <string name="labellastBreastTime">Time on breast</string>
+
+</resources>
