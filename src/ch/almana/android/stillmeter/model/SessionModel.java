@@ -140,4 +140,8 @@ public class SessionModel {
 	public Position getPossition() {
 		return position;
 	}
+
+	public long getStartTime() {
+		return start;
+	}
 }

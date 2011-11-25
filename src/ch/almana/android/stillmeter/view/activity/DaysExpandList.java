@@ -1,7 +1,5 @@
 package ch.almana.android.stillmeter.view.activity;
 
-import java.util.Date;
-
 import android.app.ExpandableListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -44,12 +42,7 @@ public class DaysExpandList extends ExpandableListActivity {
 			@Override
 			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
 				if (columnIndex == Session.INDEX_TIME_START) {
-					StringBuilder sb = new StringBuilder();
-					Date time = new Date(cursor.getLong(Session.INDEX_TIME_START));
-					sb.append(Formater.formatTime(time));
-					time.setTime(cursor.getLong(Session.INDEX_TIME_END));
-					sb.append(" - ").append(Formater.formatTime(time));
-					((TextView) view).setText(sb.toString());
+					((TextView) view).setText(Formater.sessionTime(cursor));
 					return true;
 				} else if (columnIndex == Session.INDEX_TOTAL_TIME) {
 					StringBuilder sb = new StringBuilder();

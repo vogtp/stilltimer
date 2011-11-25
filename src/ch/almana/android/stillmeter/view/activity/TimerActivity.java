@@ -2,6 +2,7 @@ package ch.almana.android.stillmeter.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -14,6 +15,8 @@ import ch.almana.android.stillmeter.helper.Formater;
 import ch.almana.android.stillmeter.helper.Settings;
 import ch.almana.android.stillmeter.model.BreastModel.Position;
 import ch.almana.android.stillmeter.model.SessionModel;
+import ch.almana.android.stillmeter.provider.db.DB.Session;
+import ch.almana.android.stillmeter.provider.db.DB.StillTime;
 import ch.almana.android.stilltimer.R;
 
 public class TimerActivity extends Activity {
@@ -35,6 +38,10 @@ public class TimerActivity extends Activity {
 			updateView();
 		}
 	};
+	private TextView tvLastSession;
+	private TextView tvLastSessionDuration;
+	private TextView tvLastBreast;
+	private TextView tvLastBreastTime;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,10 @@ public class TimerActivity extends Activity {
 		tvLeft = (TextView) findViewById(R.id.tvLeft);
 		tvRight = (TextView) findViewById(R.id.tvRight);
 		tvTotal = (TextView) findViewById(R.id.tvTotal);
+		tvLastSession = (TextView) findViewById(R.id.tvLastSession);
+		tvLastSessionDuration = (TextView) findViewById(R.id.tvLastSessionDuration);
+		tvLastBreast = (TextView) findViewById(R.id.tvLastBreast);
+		tvLastBreastTime = (TextView) findViewById(R.id.tvLastBreastTime);
 
 		Settings settings = Settings.getInstance();
 
@@ -108,6 +119,24 @@ public class TimerActivity extends Activity {
 		updateTextView(tvLeft, l);
 		updateTextView(tvRight, r);
 		updateTextView(tvTotal, t);
+		long sessionStartTime = sessionModel.getStartTime();
+		Cursor sessionCursor = managedQuery(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, null, null, Session.SORTORDER_DEFAULT);
+		boolean notFound = true;
+		while (notFound && sessionCursor.moveToNext()) {
+			if (sessionCursor.getLong(Session.INDEX_TIME_START) < sessionStartTime
+					&& sessionCursor.getLong(Session.INDEX_TIME_END) > -1) {
+				tvLastSession.setText(Formater.sessionTime(sessionCursor));
+				tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
+				Cursor timerCursor = managedQuery(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
+				if (timerCursor.moveToFirst()) {
+					tvLastBreast.setText(timerCursor.getString(StillTime.INDEX_BREAST));
+					long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
+					tvLastBreastTime.setText(Formater.timeElapsed(bt));
+				}
+				notFound = false;
+			}
+		}
+		sessionCursor.close();
 		runTimerHandler();
 	}
 

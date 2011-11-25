@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.database.Cursor;
+import ch.almana.android.stillmeter.provider.db.DB.Session;
+
 public class Formater {
 
 	private static final SimpleDateFormat timeDateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
@@ -32,5 +35,14 @@ public class Formater {
 
 	public static String formatDateTime(Date time) {
 		return timeDateFormat.format(time);
+	}
+
+	public static CharSequence sessionTime(Cursor cursor) {
+		StringBuilder sb = new StringBuilder();
+		Date time = new Date(cursor.getLong(Session.INDEX_TIME_START));
+		sb.append(Formater.formatTime(time));
+		time.setTime(cursor.getLong(Session.INDEX_TIME_END));
+		sb.append(" - ").append(Formater.formatTime(time));
+		return sb.toString();
 	}
 }
