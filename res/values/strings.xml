@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Stilltimer</string>
+    <string name="left">Left</string>
+    <string name="buLeftOn">Feeding Left</string>
+    <string name="right">Right</string>
+    <string name="buRightOn">Feeding Right</string>
+    <string name="labelTotal">Total</string>
+    <string name="labelLastSession">Last Session</string>
+    <string name="tvLastSession">none</string>
+    <string name="labelLastSessionDuration">Duration</string>
+    <string name="labelLastBreast">Last Breast</string>
+    <string name="labellastBreastTime">Time</string>
+
+</resources>

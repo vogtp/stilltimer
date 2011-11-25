@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="graphDayTextSize">12sp</dimen>
+    <dimen name="graphTimeTextSize">10sp</dimen>
+    <dimen name="graphLineSep">15dp</dimen>
+    <dimen name="graphStroke">5dp</dimen>
+
+    
+</resources>
