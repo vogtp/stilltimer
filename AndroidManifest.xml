@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.almana.android.stilltimer"
-    android:versionCode="201111170"
+    android:versionCode="201111250"
     android:versionName="0.1.0" >
 
     <uses-sdk android:minSdkVersion="7" />

@@ -120,23 +120,29 @@ public class TimerActivity extends Activity {
 		updateTextView(tvRight, r);
 		updateTextView(tvTotal, t);
 		long sessionStartTime = sessionModel.getStartTime();
-		Cursor sessionCursor = managedQuery(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, null, null, Session.SORTORDER_DEFAULT);
-		boolean notFound = true;
-		while (notFound && sessionCursor.moveToNext()) {
-			if (sessionCursor.getLong(Session.INDEX_TIME_START) < sessionStartTime
-					&& sessionCursor.getLong(Session.INDEX_TIME_END) > -1) {
-				tvLastSession.setText(Formater.sessionTime(sessionCursor));
-				tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
-				Cursor timerCursor = managedQuery(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
-				if (timerCursor.moveToFirst()) {
-					tvLastBreast.setText(Formater.translatedBreast(this, timerCursor.getString(StillTime.INDEX_BREAST)));
-					long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
-					tvLastBreastTime.setText(Formater.timeElapsed(bt));
+		Cursor sessionCursor = null;
+		try {
+			sessionCursor = getContentResolver().query(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, null, null, Session.SORTORDER_DEFAULT);
+			boolean notFound = true;
+			while (notFound && sessionCursor.moveToNext()) {
+				if (sessionCursor.getLong(Session.INDEX_TIME_START) < sessionStartTime
+						&& sessionCursor.getLong(Session.INDEX_TIME_END) > -1) {
+					tvLastSession.setText(Formater.sessionTime(sessionCursor));
+					tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
+					Cursor timerCursor = managedQuery(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
+					if (timerCursor.moveToFirst()) {
+						tvLastBreast.setText(Formater.translatedBreast(this, timerCursor.getString(StillTime.INDEX_BREAST)));
+						long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
+						tvLastBreastTime.setText(Formater.timeElapsed(bt));
+					}
+					notFound = false;
 				}
-				notFound = false;
+			}
+		} finally {
+			if (sessionCursor != null) {
+				sessionCursor.close();
 			}
 		}
-		sessionCursor.close();
 		runTimerHandler();
 	}
 
