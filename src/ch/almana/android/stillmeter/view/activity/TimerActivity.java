@@ -129,13 +129,21 @@ public class TimerActivity extends Activity {
 						&& sessionCursor.getLong(Session.INDEX_TIME_END) > -1) {
 					tvLastSession.setText(Formater.sessionTime(sessionCursor));
 					tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
-					Cursor timerCursor = managedQuery(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
-					if (timerCursor.moveToFirst()) {
-						tvLastBreast.setText(Formater.translatedBreast(this, timerCursor.getString(StillTime.INDEX_BREAST)));
-						long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
-						tvLastBreastTime.setText(Formater.timeElapsed(bt));
+
+					Cursor timerCursor = null;
+					try {
+						timerCursor = getContentResolver().query(StillTime.CONTENT_URI, StillTime.PROJECTION_DEFAULT, null, null, StillTime.SORTORDER_DEFAULT);
+						if (timerCursor.moveToFirst()) {
+							tvLastBreast.setText(Formater.translatedBreast(this, timerCursor.getString(StillTime.INDEX_BREAST)));
+							long bt = timerCursor.getLong(StillTime.INDEX_TIME_END) - timerCursor.getLong(StillTime.INDEX_TIME_START);
+							tvLastBreastTime.setText(Formater.timeElapsed(bt));
+							notFound = false;
+						}
+					} finally {
+						if (timerCursor != null) {
+							timerCursor.close();
+						}
 					}
-					notFound = false;
 				}
 			}
 		} finally {
