@@ -81,7 +81,7 @@ public class SessionModel {
 
 	private void loadBreastState(String key, Position pos, Bundle inState) {
 		Bundle state = inState.getBundle(key);
-		if (key != null) {
+		if (state != null) {
 			breastModels.put(pos, new BreastModel(dbId, state));
 		}
 	}
