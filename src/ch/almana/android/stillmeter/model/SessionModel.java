@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import ch.almana.android.stillmeter.helper.Settings;
 import ch.almana.android.stillmeter.log.Logger;
 import ch.almana.android.stillmeter.model.BreastModel.Position;
@@ -19,6 +20,16 @@ import ch.almana.android.stillmeter.provider.db.DB.Session;
 public class SessionModel {
 
 	private static final SimpleDateFormat dayFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+	private static final String BUNDLE_LEFT_BREAST = "BUNDLE_LEFT_BREAST";
+	private static final String BUNDLE_RIGHT_BREAST = "BUNDLE_RIGHT_BREAST";
+	private static final String BUNDLE_DBID = "BUNDLE_DBID";
+	private static final String BUNDLE_DAY = "BUNDLE_DAY";
+	private static final String BUNDLE_DAY_DBID = "BUNDLE_DAY_DBID";
+	private static final String BUNDLE_START = "BUNDLE_START";
+	private static final String BUNDLE_END = "BUNDLE_END";
+	private static final String BUNDLE_LAST_ACTION = "BUNDLE_LAST_ACTION";
+	private static final String BUNDLE_POSITION = "BUNDLE_POSITION";
 
 	private final EnumMap<Position, BreastModel> breastModels = new EnumMap<Position, BreastModel>(Position.class);
 
@@ -41,6 +52,45 @@ public class SessionModel {
 		insertOrUpdate(ctx);
 		breastModels.put(Position.left, new BreastModel(Position.left, dbId));
 		breastModels.put(Position.right, new BreastModel(Position.right, dbId));
+	}
+
+	public SessionModel(Bundle inState) {
+		super();
+		dbId = inState.getLong(BUNDLE_DBID);
+		day = inState.getString(BUNDLE_DAY);
+		dayDbId = inState.getLong(BUNDLE_DAY_DBID);
+		start = inState.getLong(BUNDLE_START);
+		end = inState.getLong(BUNDLE_END);
+		lastAction = inState.getLong(BUNDLE_LAST_ACTION);
+		position = Position.valueOf(inState.getString(BUNDLE_POSITION));
+		loadBreastState(BUNDLE_LEFT_BREAST, Position.left, inState);
+		loadBreastState(BUNDLE_RIGHT_BREAST, Position.right, inState);
+	}
+
+	public void saveInstanceState(Bundle outState) {
+		outState.putLong(BUNDLE_DBID, dbId);
+		outState.putString(BUNDLE_DAY, day);
+		outState.putLong(BUNDLE_DAY_DBID, dayDbId);
+		outState.putLong(BUNDLE_START, start);
+		outState.putLong(BUNDLE_END, end);
+		outState.putLong(BUNDLE_LAST_ACTION, lastAction);
+		outState.putString(BUNDLE_POSITION, position.toString());
+		saveBreastState(BUNDLE_LEFT_BREAST, Position.left, outState);
+		saveBreastState(BUNDLE_RIGHT_BREAST, Position.right, outState);
+	}
+
+	private void loadBreastState(String key, Position pos, Bundle inState) {
+		Bundle state = inState.getBundle(key);
+		if (key != null) {
+			breastModels.put(pos, new BreastModel(dbId, state));
+		}
+	}
+
+	private void saveBreastState(String key, Position pos, Bundle outState) {
+		BreastModel breastModel = breastModels.get(pos);
+		if (breastModel != null) {
+			outState.putBundle(BUNDLE_LEFT_BREAST, breastModel.getBundle());
+		}
 	}
 
 	public long getTotalTime() {

@@ -44,6 +44,18 @@ public class TimerActivity extends Activity {
 	private TextView tvLastBreastTime;
 
 	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		sessionModel.saveInstanceState(outState);
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		sessionModel = new SessionModel(savedInstanceState);
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timer);

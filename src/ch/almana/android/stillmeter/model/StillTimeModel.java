@@ -4,11 +4,22 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import ch.almana.android.stillmeter.model.BreastModel.Position;
 import ch.almana.android.stillmeter.provider.db.DB;
 import ch.almana.android.stillmeter.provider.db.DB.StillTime;
 
 public class StillTimeModel {
+
+	private static final String BUNDLE_DBID = "BUNDLE_DBID";
+
+	private static final String BUNDLE_SESSION = "BUNDLE_SESSION";
+
+	private static final String BUNDLE_STARTTIME = "BUNDLE_STARTTIME";
+
+	private static final String BUNDLE_ENDTIME = "BUNDLE_ENDTIME";
+
+	private static final String BUNDLE_POSITION = "BUNDLE_POSITION";
 
 	private Position position = Position.none;
 
@@ -35,6 +46,25 @@ public class StillTimeModel {
 
 	public StillTimeModel(Context ctx, Position position, long session, long startTime) {
 		this(ctx, position, session, startTime, -1);
+	}
+
+	public StillTimeModel(Bundle state) {
+		this();
+		dbId = state.getLong(BUNDLE_DBID);
+		session = state.getLong(BUNDLE_SESSION);
+		startTime = state.getLong(BUNDLE_STARTTIME);
+		endTime = state.getLong(BUNDLE_ENDTIME);
+		position = Position.valueOf(state.getString(BUNDLE_POSITION));
+	}
+
+	public Bundle getBundle() {
+		Bundle state = new Bundle();
+		state.putLong(BUNDLE_DBID, dbId);
+		state.putLong(BUNDLE_SESSION, session);
+		state.putLong(BUNDLE_STARTTIME, startTime);
+		state.putLong(BUNDLE_ENDTIME, endTime);
+		state.putString(BUNDLE_POSITION, position.toString());
+		return state;
 	}
 
 	public Position getPosition() {
@@ -92,5 +122,6 @@ public class StillTimeModel {
 			dbId = ContentUris.parseId(uri);
 		}
 	}
+
 
 }
