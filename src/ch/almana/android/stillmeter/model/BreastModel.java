@@ -8,6 +8,7 @@ public class BreastModel {
 
 	private static final String BUNDLE_POSITION = "BUNDLE_POSITION";
 	private static final String BUNDLE_STILL_TIME_MODEL = "BUNDLE_STILL_TIME_MODEL";
+	private static final String BUNDLE_TOTAL_TIME = "BUNDLE_TOTAL_TIME";
 
 	public enum Position {
 		none, left, right
@@ -29,6 +30,7 @@ public class BreastModel {
 		super();
 		this.session = session;
 		position = Position.valueOf(state.getString(BUNDLE_POSITION));
+		totalTime = state.getLong(BUNDLE_TOTAL_TIME);
 		Bundle bundle = state.getBundle(BUNDLE_STILL_TIME_MODEL);
 		if (bundle != null) {
 			currentStillTimeModel = new StillTimeModel(bundle);
@@ -38,6 +40,7 @@ public class BreastModel {
 	public Bundle getBundle() {
 		Bundle state = new Bundle();
 		state.putString(BUNDLE_POSITION, position.toString());
+		state.putLong(BUNDLE_TOTAL_TIME, totalTime);
 		if (currentStillTimeModel != null) {
 			state.putBundle(BUNDLE_STILL_TIME_MODEL, currentStillTimeModel.getBundle());
 		}

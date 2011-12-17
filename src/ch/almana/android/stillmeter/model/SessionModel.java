@@ -89,7 +89,7 @@ public class SessionModel {
 	private void saveBreastState(String key, Position pos, Bundle outState) {
 		BreastModel breastModel = breastModels.get(pos);
 		if (breastModel != null) {
-			outState.putBundle(BUNDLE_LEFT_BREAST, breastModel.getBundle());
+			outState.putBundle(key, breastModel.getBundle());
 		}
 	}
 
