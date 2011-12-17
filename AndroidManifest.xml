@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.almana.android.stilltimer"
-    android:versionCode="201112140"
-    android:versionName="0.3.0" >
+    android:versionCode="201112170"
+    android:versionName="0.3.1" >
 
     <uses-sdk android:minSdkVersion="7" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:label="@string/app_name"
-            android:name="ch.almana.android.stillmeter.view.activity.TabMainActivity" >
-            <intent-filter >
+            android:name="ch.almana.android.stillmeter.view.activity.TabMainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider android:name="ch.almana.android.stillmeter.provider.StillProvider" android:authorities="ch.almana.android.stilltimer"></provider>
-        <activity android:name="ch.almana.android.stillmeter.view.activity.TimerActivity"></activity>
-        <activity android:name="ch.almana.android.stillmeter.view.activity.DaysExpandList"></activity>
-        <activity android:name="ch.almana.android.stillmeter.view.activity.GraphActivity"></activity>
+
+        <provider
+            android:name="ch.almana.android.stillmeter.provider.StillProvider"
+            android:authorities="ch.almana.android.stilltimer" >
+        </provider>
+
+        <activity android:name="ch.almana.android.stillmeter.view.activity.TimerActivity" >
+        </activity>
+        <activity android:name="ch.almana.android.stillmeter.view.activity.DaysExpandList" >
+        </activity>
+        <activity android:name="ch.almana.android.stillmeter.view.activity.GraphActivity" >
+        </activity>
     </application>
 
 </manifest>
