@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="menuSettings">Preferences</string>
+    <string name="prefMaxSessionAge">Time between sessions</string>
+    <string name="prefMaxSessionAgeLong">If the time difference in minutes is bigger than this a new session is started.</string>
+
+    <string-array name="prefWakelockTypeEntry">
+        <item>Turn screen off</item>
+        <item>Dim screen</item>
+        <item>Bright screen</item>
+    </string-array>
+
+    <string name="prefWakelockType">Screen while feeding</string>
+    <string name="prefWakelockTypeLong">Should the screen be kept on while feeding?  A brigt screen uses most battery and a turned off screen least.</string>
+    <string name="prefColors">Colors</string>
+    <string name="prefBreastColorLeft">Left breast color</string>
+    <string name="prefBreastColorRight">Right breast color</string>
     <string name="app_name">Still Timer</string>
     <string name="left">Left</string>
     <string name="buLeftOn">Feeding Left</string>

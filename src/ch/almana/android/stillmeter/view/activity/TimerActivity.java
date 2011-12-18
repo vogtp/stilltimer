@@ -75,12 +75,8 @@ public class TimerActivity extends Activity {
 		tvLastBreast = (TextView) findViewById(R.id.tvLastBreast);
 		tvLastBreastTime = (TextView) findViewById(R.id.tvLastBreastTime);
 
-		Settings settings = Settings.getInstance();
-
 		buLeft.setHeight(buLeft.getWidth());
-		buLeft.setTextColor(settings.getLeftColor());
 		buRight.setHeight(buRight.getWidth());
-		buRight.setTextColor(settings.getRightColor());
 
 		buLeft.setOnClickListener(new OnClickListener() {
 			@Override
@@ -104,6 +100,9 @@ public class TimerActivity extends Activity {
 		if (sessionModel.isTooOld()) {
 			sessionModel = new SessionModel(this);
 		}
+		Settings settings = Settings.getInstance(this);
+		buLeft.setTextColor(settings.getLeftColor());
+		buRight.setTextColor(settings.getRightColor());
 		updateView();
 		runTimerHandler();
 	}
@@ -195,9 +194,12 @@ public class TimerActivity extends Activity {
 	}
 
 	private void acquireWakelock() {
-		PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-		wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "stilltimer");
-		wakeLock.acquire();
+		int wakelockType = Settings.getInstance(this).getWakelockType();
+		if (wakelockType != Settings.NO_WAKELOCK) {
+			PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
+			wakeLock = pm.newWakeLock(wakelockType, "stilltimer");
+			wakeLock.acquire();
+		}
 	}
 
 	private void releaseWakelock() {

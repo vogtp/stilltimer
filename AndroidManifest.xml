@@ -32,6 +32,8 @@
         </activity>
         <activity android:name="ch.almana.android.stillmeter.view.activity.GraphActivity" >
         </activity>
+        <activity android:name="ch.almana.android.stillmeter.view.preference.StillTimerPreference" >
+        </activity>
     </application>
 
 </manifest>

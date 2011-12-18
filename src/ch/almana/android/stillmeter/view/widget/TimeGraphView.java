@@ -99,7 +99,7 @@ public class TimeGraphView extends View {
 		Calendar cal = Calendar.getInstance();
 		try {
 
-			Settings settings = Settings.getInstance();
+			Settings settings = Settings.getInstance(getContext());
 			int leftColor = settings.getLeftColor();
 			int rightColor = settings.getRightColor();
 			dayCursor = resolver.query(Day.CONTENT_URI, Day.PROJECTION_DEFAULT, null, null, Day.SORTORDER_DEFAULT);

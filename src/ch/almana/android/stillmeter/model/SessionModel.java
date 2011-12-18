@@ -44,12 +44,15 @@ public class SessionModel {
 
 	private Position position = Position.none;
 
+	private Context context;
+
 	public SessionModel(Context ctx) {
 		super();
+		context = ctx.getApplicationContext();
 		day = dayFormat.format(new Date());
 		start = System.currentTimeMillis();
-		ensureDay(ctx);
-		insertOrUpdate(ctx);
+		ensureDay(context);
+		insertOrUpdate(context);
 		breastModels.put(Position.left, new BreastModel(Position.left, dbId));
 		breastModels.put(Position.right, new BreastModel(Position.right, dbId));
 	}
@@ -179,7 +182,7 @@ public class SessionModel {
 			Logger.i("Session not too old since it is never used");
 			return false;
 		}
-		if (System.currentTimeMillis() - lastAction > Settings.getInstance().getMaxSessionAge()) {
+		if (System.currentTimeMillis() - lastAction > Settings.getInstance(context).getMaxSessionAge()) {
 			Logger.i("Session too old");
 			return true;
 		}

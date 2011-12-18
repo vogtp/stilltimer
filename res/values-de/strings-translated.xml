@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="menuSettings">Einstellungen</string>
+    <string name="prefMaxSessionAge">Zeitdifferenz für neues Mal</string>
+    <string name="prefMaxSessionAgeLong">Falls diese Zeitdifferenz in Minuten überschritten ist, wird eine neue Still-Malzeit gestartet.</string>
+
+    <string-array name="prefWakelockTypeEntry">
+        <item>Abschalten</item>
+        <item>Dunkel machen</item>
+        <item>Hell lassen</item>
+    </string-array>
+
+    <string name="prefWakelockType">Bildschirm während des Stillens</string>
+    <string name="prefWakelockTypeLong">Soll der Bildschirm während des Stillens an bleiden?  Ein heller Bildschirm brauch am meisten und ein ausgeschalteter am wenigsten Batterie.</string>
+    <string name="prefColors">Farben</string>
+    <string name="prefBreastColorLeft">Farbe der linken Brust</string>
+    <string name="prefBreastColorRight">Farbe der rechten Brust</string>
     <string name="app_name">Still Timer</string>
     <string name="left">Links</string>
     <string name="buLeftOn">Links Stillen</string>

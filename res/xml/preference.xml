@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceScreen
+        android:key="prefKeyColors"
+        android:title="@string/prefColors" >
+        <Preference
+            android:key="prefKeyBreastColorLeft"
+            android:title="@string/prefBreastColorLeft" />
+        <Preference
+            android:key="prefKeyBreastColorRight"
+            android:title="@string/prefBreastColorRight" />
+    </PreferenceScreen>
+
+    <ListPreference
+        android:entries="@array/prefWakelockTypeEntry"
+        android:entryValues="@array/prefWakelockTypeEntryValues"
+        android:key="prefKeyWakelockType"
+        android:summary="@string/prefWakelockTypeLong"
+        android:title="@string/prefWakelockType" />
+
+    <EditTextPreference
+        android:defaultValue="30"
+        android:dialogMessage="@string/prefMaxSessionAgeLong"
+        android:dialogTitle="@string/prefMaxSessionAge"
+        android:key="prefKeyMaxSessionAge"
+        android:summary="@string/prefMaxSessionAgeLong"
+        android:title="@string/prefMaxSessionAge" />
+
+</PreferenceScreen>
