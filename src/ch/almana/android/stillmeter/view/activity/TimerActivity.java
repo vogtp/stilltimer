@@ -199,6 +199,8 @@ public class TimerActivity extends Activity {
 			PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
 			wakeLock = pm.newWakeLock(wakelockType, "stilltimer");
 			wakeLock.acquire();
+		} else {
+			releaseWakelock();
 		}
 	}
 
