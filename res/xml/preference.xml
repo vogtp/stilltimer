@@ -13,6 +13,7 @@
     </PreferenceScreen>
 
     <ListPreference
+        android:defaultValue="6"
         android:entries="@array/prefWakelockTypeEntry"
         android:entryValues="@array/prefWakelockTypeEntryValues"
         android:key="prefKeyWakelockType"
