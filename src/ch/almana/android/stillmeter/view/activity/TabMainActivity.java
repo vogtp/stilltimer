@@ -1,12 +1,17 @@
 package ch.almana.android.stillmeter.view.activity;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TabHost;
+import ch.almana.android.importexportdb.BackupRestoreCallback;
+import ch.almana.android.stillmeter.helper.BackupRestoreHelper;
+import ch.almana.android.stillmeter.provider.db.DB.Session;
 import ch.almana.android.stillmeter.view.preference.StillTimerPreference;
 import ch.almana.android.stilltimer.R;
 
@@ -55,6 +60,32 @@ public class TabMainActivity extends TabActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		backup();
+	}
+
+	private void backup() {
+		Cursor c = getContentResolver().query(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, null, null, Session.SORTORDER_DEFAULT);
+		if (c == null || c.getCount() < 7) {
+			return;
+		}
+		BackupRestoreHelper brh = new BackupRestoreHelper(new BackupRestoreCallback() {
+			@Override
+			public void hasFinished(boolean success) {
+			}
+
+			@Override
+			public Context getContext() {
+				// TODO Auto-generated method stub
+				return getApplicationContext();
+			}
+		});
+		brh.backup();
+	}
+
 	//
 	//	@Override
 	//	public boolean onPrepareOptionsMenu(Menu menu) {

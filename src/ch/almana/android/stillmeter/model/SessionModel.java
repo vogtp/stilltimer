@@ -127,6 +127,7 @@ public class SessionModel {
 
 	public void endFeeding(Context ctx, Position pos) {
 		lastAction = System.currentTimeMillis();
+		// npe?
 		breastModels.get(pos).end(ctx);
 		end = System.currentTimeMillis();
 		position = Position.none;
@@ -182,8 +183,13 @@ public class SessionModel {
 			Logger.i("Session not too old since it is never used");
 			return false;
 		}
-		if (System.currentTimeMillis() - lastAction > Settings.getInstance(context).getMaxSessionAge()) {
-			Logger.i("Session too old");
+		try {
+			if (System.currentTimeMillis() - lastAction > Settings.getInstance(context).getMaxSessionAge()) {
+				Logger.i("Session too old");
+				return true;
+			}
+		} catch (Exception e) {
+			Logger.i("Session age produces error", e);
 			return true;
 		}
 		Logger.i("Session not too old");

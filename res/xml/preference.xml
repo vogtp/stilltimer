@@ -28,4 +28,18 @@
         android:summary="@string/prefMaxSessionAgeLong"
         android:title="@string/prefMaxSessionAge" />
 
+    <PreferenceScreen
+        android:key="prefCatBackupRestore"
+        android:title="@string/prefCatBackupRestore" >
+        <Preference
+            android:key="prefKeyBackup"
+            android:title="@string/prefKeyBackup" />
+        <Preference
+            android:key="prefKeyRestore"
+            android:title="@string/prefRestore" />
+        <Preference
+            android:key="prefKeyDeleteEverything"
+            android:title="@string/prefDeleteEverything" />
+    </PreferenceScreen>
+
 </PreferenceScreen>

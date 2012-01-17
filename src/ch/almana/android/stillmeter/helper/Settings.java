@@ -22,6 +22,10 @@ public class Settings {
 
 	private final Context context;
 
+	public static Settings getInstance() {
+		return instance;
+	}
+
 	public static Settings getInstance(Context ctx) {
 		if (instance == null) {
 			instance = new Settings(ctx.getApplicationContext());

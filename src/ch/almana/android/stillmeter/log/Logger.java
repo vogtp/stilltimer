@@ -14,6 +14,10 @@ public class Logger {
 
 	public final static boolean DEBUG = false;
 
+	public static void e(String msg, Throwable t) {
+		Log.e(TAG, msg);
+	}
+
 	public static void w(String msg, Throwable t) {
 		Log.w(TAG, msg);
 	}

@@ -1,11 +1,14 @@
 package ch.almana.android.stillmeter.provider;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 import ch.almana.android.stillmeter.log.Logger;
+import ch.almana.android.stillmeter.provider.db.DB;
 import ch.almana.android.stillmeter.provider.db.DB.Day;
 import ch.almana.android.stillmeter.provider.db.DB.OpenHelper;
 import ch.almana.android.stillmeter.provider.db.DB.Session;
@@ -23,6 +26,8 @@ public class StillProvider extends ContentProvider {
 	private static final int DAY = 3;
 
 	private static final UriMatcher sUriMatcher;
+
+	private static boolean notifyChanges = true;
 
 	private OpenHelper openHelper;
 
@@ -134,7 +139,13 @@ public class StillProvider extends ContentProvider {
 	}
 
 	private void notifyChange(Uri uri) {
-		getContext().getContentResolver().notifyChange(uri, null);
+		if (notifyChanges) {
+			getContext().getContentResolver().notifyChange(uri, null);
+		}
+	}
+
+	public static void setNotifyChanges(boolean b) {
+		notifyChanges = b;
 	}
 
 	static {
@@ -145,6 +156,13 @@ public class StillProvider extends ContentProvider {
 		sUriMatcher.addURI(AUTHORITY, Session.CONTENT_ITEM_NAME + "/#", SESSION);
 		sUriMatcher.addURI(AUTHORITY, Day.CONTENT_ITEM_NAME, DAY);
 		sUriMatcher.addURI(AUTHORITY, Day.CONTENT_ITEM_NAME + "/#", DAY);
+	}
+
+	public static void deleteAllTables(Context ctx) {
+		ContentResolver resolver = ctx.getContentResolver();
+		resolver.delete(DB.Session.CONTENT_URI, null, null);
+		resolver.delete(DB.Day.CONTENT_URI, null, null);
+		resolver.delete(DB.StillTime.CONTENT_URI, null, null);
 	}
 
 }

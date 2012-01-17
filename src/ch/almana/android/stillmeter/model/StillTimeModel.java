@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import ch.almana.android.importexportdb.importer.JSONBundle;
 import ch.almana.android.stillmeter.model.BreastModel.Position;
 import ch.almana.android.stillmeter.provider.db.DB;
 import ch.almana.android.stillmeter.provider.db.DB.StillTime;
@@ -49,6 +50,15 @@ public class StillTimeModel {
 	}
 
 	public StillTimeModel(Bundle state) {
+		this();
+		dbId = state.getLong(BUNDLE_DBID);
+		session = state.getLong(BUNDLE_SESSION);
+		startTime = state.getLong(BUNDLE_STARTTIME);
+		endTime = state.getLong(BUNDLE_ENDTIME);
+		position = Position.valueOf(state.getString(BUNDLE_POSITION));
+	}
+
+	public StillTimeModel(JSONBundle state) {
 		this();
 		dbId = state.getLong(BUNDLE_DBID);
 		session = state.getLong(BUNDLE_SESSION);
