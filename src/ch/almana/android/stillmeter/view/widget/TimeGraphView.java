@@ -66,7 +66,7 @@ public class TimeGraphView extends View {
 		Cursor dayCursor = null;
 		try {
 			dayCursor = getContext().getContentResolver().query(Day.CONTENT_URI, Day.PROJECTION_DEFAULT, null, null, Day.SORTORDER_DEFAULT);
-			setMinimumHeight(Math.round((dayCursor.getCount() + 2) * lineSep));
+			setMinimumHeight(Math.round((dayCursor.getCount() + 1) * lineSep));
 		} finally {
 			if (dayCursor != null) {
 				dayCursor.close();
@@ -92,7 +92,7 @@ public class TimeGraphView extends View {
 			sb.append(i);
 			double i2 = i;
 			float pos = (float) (i2 * HOUR_IN_MILLIES * minInPx);
-			canvas.drawText(sb.toString(), pos + 1, lineSep, timeLabelPaint);
+			//canvas.drawText(sb.toString(), pos + 1, lineSep, timeLabelPaint);
 			canvas.drawLine(pos, 0, pos, height, timePaint);
 		}
 
@@ -103,7 +103,7 @@ public class TimeGraphView extends View {
 			int leftColor = settings.getLeftColor();
 			int rightColor = settings.getRightColor();
 			dayCursor = resolver.query(Day.CONTENT_URI, Day.PROJECTION_DEFAULT, null, null, Day.SORTORDER_DEFAULT);
-			float day = 2f;
+			float day = 1f;
 			while (dayCursor.moveToNext()) {
 				float yPos = day++ * lineSep;
 				canvas.drawText(dayCursor.getString(Day.INDEX_DAY), 5, yPos, dayPaint);

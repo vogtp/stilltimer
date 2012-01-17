@@ -4,6 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <ch.almana.android.stillmeter.view.widget.TimeGraphLabelView
+        android:id="@+id/timeGraphLabelView"
+        android:layout_width="fill_parent"
+        android:layout_height="15dp" />
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
@@ -12,13 +17,12 @@
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="wrap_content" >
 
             <ch.almana.android.stillmeter.view.widget.TimeGraphView
                 android:id="@+id/timeGraphView"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" />
-
         </LinearLayout>
     </ScrollView>
 
