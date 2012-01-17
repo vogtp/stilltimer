@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="prefCatBackupRestore">Sichern/Wiederherstellen</string>
+    <string name="prefKeyBackup">Sichern</string>
+    <string name="prefRestore">Wiederherstellen</string>
+    <string name="prefDeleteEverything">Alles löschen</string>
+    <string name="msg_error_restoring">Beim Wiederherstellen ist ein Fehler aufgetreten!</string>
+    <string name="msg_backuping">Sichere…</string>
+    <string name="msg_restoring">Stelle wieder her…</string>
+    <string name="title_delete_tables">Alle Daten löschen??</string>
+    <string name="msg_delete_tables">Willst Du wirklich alle Daten löschen und neu beginnen?</string>
+    <string name="no">Nein</string>
+    <string name="yes">Ja</string>
+    <string name="prefKeyBackupLong">Stilltimer sichert automatisch nachdem 7 Mal gestillt wurde.</string>
     <string name="menuSettings">Einstellungen</string>
     <string name="prefMaxSessionAge">Zeitdifferenz für neues Mal</string>
     <string name="prefMaxSessionAgeLong">Falls diese Zeitdifferenz in Minuten überschritten ist, wird eine neue Still-Malzeit gestartet.</string>

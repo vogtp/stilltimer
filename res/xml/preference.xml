@@ -33,6 +33,7 @@
         android:title="@string/prefCatBackupRestore" >
         <Preference
             android:key="prefKeyBackup"
+            android:summary="@string/prefKeyBackupLong"
             android:title="@string/prefKeyBackup" />
         <Preference
             android:key="prefKeyRestore"

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="prefCatBackupRestore">Backup/Restore</string>
+    <string name="prefKeyBackup">Backup</string>
+    <string name="prefRestore">Restore</string>
+    <string name="prefDeleteEverything">Delete everything</string>
+    <string name="msg_error_restoring">Error restoring</string>
+    <string name="msg_backuping">Backuping…</string>
+    <string name="msg_restoring">Restoring…</string>
+    <string name="title_delete_tables">Delete all data?</string>
+    <string name="msg_delete_tables">Do you really want to delete all data and start completely new?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="prefKeyBackupLong">Stilltimer is backing up the data automatically after 7 sessions</string>
     <string name="menuSettings">Preferences</string>
     <string name="prefMaxSessionAge">Time between sessions</string>
     <string name="prefMaxSessionAgeLong">If the time difference in minutes is bigger than this a new session is started.</string>
