@@ -47,7 +47,7 @@ public class TimeGraphView extends View {
 	private void init() {
 		Resources resources = getContext().getResources();
 		dayPaint = new Paint();
-		dayPaint.setColor(Color.LTGRAY);
+		dayPaint.setColor(Color.DKGRAY);
 		dayPaint.setStrokeWidth(0);
 		dayPaint.setTextSize(resources.getDimension(R.dimen.graphDayTextSize));
 		timePaint = new Paint();
@@ -106,6 +106,7 @@ public class TimeGraphView extends View {
 			float day = 2f;
 			while (dayCursor.moveToNext()) {
 				float yPos = day++ * lineSep;
+				canvas.drawText(dayCursor.getString(Day.INDEX_DAY), 5, yPos, dayPaint);
 				canvas.drawLine(0, yPos, width, yPos, dayPaint);
 				cal.setTimeInMillis(dayCursor.getLong(Day.INDEX_TIME_START));
 				cal.set(Calendar.MILLISECOND, 0);
@@ -153,7 +154,6 @@ public class TimeGraphView extends View {
 				if (timeCursor != null) {
 					timeCursor.close();
 				}
-				canvas.drawText(dayCursor.getString(Day.INDEX_DAY), 5, yPos, dayPaint);
 			}
 
 		} finally {
