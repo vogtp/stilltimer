@@ -56,6 +56,9 @@ public class TabMainActivity extends TabActivity {
 			i = new Intent(getApplicationContext(), StillTimerPreference.class);
 			startActivity(i);
 			break;
+		case R.id.itemInsert:
+			startActivity(new Intent(Intent.ACTION_INSERT, Session.CONTENT_URI));
+			break;
 
 		}
 		return super.onOptionsItemSelected(item);

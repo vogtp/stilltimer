@@ -3,14 +3,15 @@
 
     <item
         android:id="@+id/itemInsert"
-        android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menuInsert">
     </item>
     <item
-        android:id="@+id/itemSettings"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:menuCategory="system"
-        android:title="@string/menuSettings">
+        android:id="@+id/itemEdit"
+        android:title="@string/menuEdit">
+    </item>
+    <item
+        android:id="@+id/itemDelete"
+        android:title="@string/menuDelete">
     </item>
 
 </menu>

@@ -8,5 +8,7 @@
     <string name="menuInsert">Insert</string>
     <string name="menuEdit">Edit</string>
     <string name="menuDelete">Delete</string>
+    <string name="title_delete_session">Delete session?</string>
+    <string name="msg_delete_session">Do you really want to delete this session and all its feeding times?</string>
 
 </resources>

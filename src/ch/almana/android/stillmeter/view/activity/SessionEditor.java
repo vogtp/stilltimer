@@ -33,6 +33,7 @@ import ch.almana.android.stilltimer.R;
 
 public class SessionEditor extends Activity implements OnDateSetListener {
 
+	public static final String EXTRA_DAY = "EXTRA_DAY";
 	private Calendar currentStartTime;
 	private Button buDay;
 	private long dbId = -1;
@@ -67,6 +68,11 @@ public class SessionEditor extends Activity implements OnDateSetListener {
 				currentStartTime.setTimeInMillis(origStartTime);
 				leftTime = cursor.getLong(Session.INDEX_BREAST_LEFT_TIME);
 				rightTime = cursor.getLong(Session.INDEX_BREAST_RIGHT_TIME);
+			}
+		} else if (Intent.ACTION_INSERT.equals(action)) {
+			Bundle extras = getIntent().getExtras();
+			if (extras != null) {
+				currentStartTime.setTimeInMillis(extras.getLong(EXTRA_DAY));
 			}
 		}
 
@@ -177,22 +183,22 @@ public class SessionEditor extends Activity implements OnDateSetListener {
 		long rightStartTime = 0;
 		switch ((Position) spBreast1.getSelectedItem()) {
 		case left:
-			leftTime = (Long) spTime1.getSelectedItem();
+			leftTime += (Long) spTime1.getSelectedItem();
 			leftStartTime = start;
 			break;
 		case right:
-			rightTime = (Long) spTime1.getSelectedItem();
+			rightTime += (Long) spTime1.getSelectedItem();
 			rightStartTime = start;
 			break;
 		}
 		switch ((Position) spBreast2.getSelectedItem()) {
 		case left:
-			leftTime = (Long) spTime2.getSelectedItem();
+			leftTime += (Long) spTime2.getSelectedItem();
 			leftStartTime = start + rightTime;
 			break;
 		case right:
-			rightTime = (Long) spTime2.getSelectedItem();
-			rightStartTime = start + leftStartTime;
+			rightTime += (Long) spTime2.getSelectedItem();
+			rightStartTime = start + leftTime;
 			break;
 		}
 		long totalTime = leftTime + rightTime;
