@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="labelDay">Day</string>
+    <string name="labelStartTime">Start Time</string>
+    <string name="buDay">click to enter day</string>
+    <string name="buStartTime">Click to enter start time</string>
+
+    <string-array name="spBreastEntry">
+        <item></item>
+        <item>Left</item>
+        <item>Right</item>
+    </string-array>
+    <string-array name="spTimeEntry">
+        <item></item>
+        <item>1 min</item>
+        <item>2 min</item>
+        <item>3 min</item>
+        <item>4 min</item>
+        <item>5 min</item>
+        <item>6 min</item>
+        <item>7 min</item>
+        <item>8 min</item>
+        <item>9 min</item>
+        <item>10 min</item>
+        <item>11 min</item>
+        <item>12 min</item>
+        <item>13 min</item>
+        <item>14 min</item>
+        <item>15 min</item>
+        <item>20 min</item>
+        <item>25 min</item>
+        <item>30 min</item>
+        <item>45 min</item>
+        <item>1 hour</item>
+    </string-array>
+
+    <string name="labelBreast">Breast</string>
+    <string name="labelTime">Time</string>
+
 </resources>

@@ -35,6 +35,30 @@
         </activity>
         <activity android:name="ch.almana.android.stillmeter.view.preference.StillTimerPreference" >
         </activity>
+        <activity android:name="ch.almana.android.stillmeter.view.activity.SessionEditor" >
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" >
+                </action>
+
+                <data android:mimeType="vnd.android.cursor.dir/ch.almana.android.stilltimer.session" >
+                </data>
+
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ch.amana.android.cputuner.ACTION_INSERT_AS_NEW" >
+                </action>
+                <action android:name="android.intent.action.EDIT" >
+                </action>
+
+                <data android:mimeType="vnd.android.cursor.item/ch.almana.android.stilltimer.session" >
+                </data>
+
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

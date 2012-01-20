@@ -12,8 +12,9 @@ import ch.almana.android.stilltimer.R;
 
 public class Formater {
 
-	private static final SimpleDateFormat timeDateFormat = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy");
-	private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+	private static final SimpleDateFormat timeDateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
 	public static String timeElapsed(long time) {
 		Calendar cal = Calendar.getInstance();
@@ -34,6 +35,10 @@ public class Formater {
 
 	public static String formatTime(Date time) {
 		return timeFormat.format(time);
+	}
+
+	public static String formatDate(Date time) {
+		return dateFormat.format(time);
 	}
 
 	public static String formatDateTime(Date time) {

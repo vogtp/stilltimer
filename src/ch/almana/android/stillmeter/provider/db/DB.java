@@ -85,12 +85,13 @@ public interface DB {
 
 		public static final String[] colNames = new String[] { NAME_ID, NAME_SESSION, NAME_BREAST, NAME_TIME_START, NAME_TIME_END };
 		public static final String[] PROJECTION_DEFAULT = colNames;
+		public static final String[] PROJECTION_BREAST = new String[] { NAME_ID, NAME_BREAST };
 
-		public static final String SORTORDER_DEFAULT = NAME_SESSION + " DESC";
-
-		static final String SORTORDER_REVERSE = NAME_SESSION + " ASC";
+		public static final String SORTORDER_DEFAULT = NAME_TIME_START + " DESC";
+		static final String SORTORDER_REVERSE = NAME_TIME_START + " ASC";
 
 		public static final String SELECTION_START_END = NAME_TIME_START + " > ? and " + NAME_TIME_START + " < ?";
+		public static final String SELECTION_BY_SESSION_ID = NAME_SESSION + " =?";
 
 	}
 

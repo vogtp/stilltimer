@@ -34,7 +34,7 @@ public class SessionModel {
 	private final EnumMap<Position, BreastModel> breastModels = new EnumMap<Position, BreastModel>(Position.class);
 
 	private long dbId = -1;
-	private final String day;
+	//	private final String day;
 	private long dayDbId = -1;
 
 	private long start = -1;
@@ -49,9 +49,8 @@ public class SessionModel {
 	public SessionModel(Context ctx) {
 		super();
 		context = ctx.getApplicationContext();
-		day = dayFormat.format(new Date());
+		dayDbId = getAndEnsureDay(context, new Date());
 		start = System.currentTimeMillis();
-		ensureDay(context);
 		insertOrUpdate(context);
 		breastModels.put(Position.left, new BreastModel(Position.left, dbId));
 		breastModels.put(Position.right, new BreastModel(Position.right, dbId));
@@ -60,7 +59,6 @@ public class SessionModel {
 	public SessionModel(Bundle inState) {
 		super();
 		dbId = inState.getLong(BUNDLE_DBID);
-		day = inState.getString(BUNDLE_DAY);
 		dayDbId = inState.getLong(BUNDLE_DAY_DBID);
 		start = inState.getLong(BUNDLE_START);
 		end = inState.getLong(BUNDLE_END);
@@ -70,9 +68,23 @@ public class SessionModel {
 		loadBreastState(BUNDLE_RIGHT_BREAST, Position.right, inState);
 	}
 
+	public ContentValues getValues() {
+		return getValues(dayDbId, start, end, getLeftTime(), getRightTime(), getTotalTime());
+	}
+
+	public static ContentValues getValues(long dayDbId, long start, long end, long leftTime, long rightTime, long totalTime) {
+		ContentValues values = new ContentValues();
+		values.put(Session.NAME_DAY, dayDbId);
+		values.put(Session.NAME_TIME_START, start);
+		values.put(Session.NAME_TIME_END, end);
+		values.put(Session.NAME_BREAST_LEFT_TIME, leftTime);
+		values.put(Session.NAME_BREAST_RIGHT_TIME, rightTime);
+		values.put(Session.NAME_TOTAL_TIME, totalTime);
+		return values;
+	}
+
 	public void saveInstanceState(Bundle outState) {
 		outState.putLong(BUNDLE_DBID, dbId);
-		outState.putString(BUNDLE_DAY, day);
 		outState.putLong(BUNDLE_DAY_DBID, dayDbId);
 		outState.putLong(BUNDLE_START, start);
 		outState.putLong(BUNDLE_END, end);
@@ -134,17 +146,6 @@ public class SessionModel {
 		insertOrUpdate(ctx);
 	}
 
-	public ContentValues getValues() {
-		ContentValues values = new ContentValues();
-		values.put(Session.NAME_DAY, dayDbId);
-		values.put(Session.NAME_TIME_START, start);
-		values.put(Session.NAME_TIME_END, end);
-		values.put(Session.NAME_BREAST_LEFT_TIME, getLeftTime());
-		values.put(Session.NAME_BREAST_RIGHT_TIME, getRightTime());
-		values.put(Session.NAME_TOTAL_TIME, getTotalTime());
-		return values;
-	}
-
 	private void insertOrUpdate(Context ctx) {
 		if (dbId > -1) {
 			ctx.getContentResolver().update(Session.CONTENT_URI, getValues(), DB.SELECTION_BY_ID, new String[] { Long.toString(dbId) });
@@ -154,21 +155,19 @@ public class SessionModel {
 		}
 	}
 
-	private void ensureDay(Context ctx) {
+	public static long getAndEnsureDay(Context ctx, Date time) {
 		Cursor c = null;
+		String day = dayFormat.format(time);
 		try {
-			if (day == null) {
-				return;
-			}
 			c = ctx.getContentResolver().query(Day.CONTENT_URI, Day.PROJECTION_DEFAULT, Day.SELECTION_BY_DAY, new String[] { day }, Day.SORTORDER_DEFAULT);
 			if (c.moveToFirst()) {
-				dayDbId = c.getLong(DB.INDEX_ID);
+				return c.getLong(DB.INDEX_ID);
 			} else {
 				ContentValues values = new ContentValues();
 				values.put(Day.NAME_DAY, day);
-				values.put(Day.NAME_TIME_START, start);
+				values.put(Day.NAME_TIME_START, time.getTime());
 				Uri uri = ctx.getContentResolver().insert(Day.CONTENT_URI, values);
-				dayDbId = ContentUris.parseId(uri);
+				return ContentUris.parseId(uri);
 			}
 		} finally {
 			if (c != null) {
