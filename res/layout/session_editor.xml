@@ -27,7 +27,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/buDay"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
 
@@ -75,8 +74,7 @@
                 android:id="@+id/spBreast1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:entries="@array/spBreastEntry" />
+                android:layout_margin="7dp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -90,8 +88,7 @@
                 android:id="@+id/spTime1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:entries="@array/spTimeEntry" />
+                android:layout_margin="7dp" />
         </TableRow>
 
         <TableRow
@@ -111,8 +108,7 @@
                 android:id="@+id/spBreast2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:entries="@array/spBreastEntry" />
+                android:layout_margin="7dp" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -126,8 +122,7 @@
                 android:id="@+id/spTime2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
-                android:entries="@array/spTimeEntry" />
+                android:layout_margin="7dp" />
         </TableRow>
     </TableLayout>
 
