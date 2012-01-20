@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="labelDay">Tag</string>
+    <string name="labelStartTime">Start Zeit</string>
+    <string name="labelBreast">Brust</string>
+    <string name="labelTime">Zeit</string>
+    <string name="menuInsert">Einfügen</string>
+    <string name="menuEdit">Editieren</string>
+    <string name="menuDelete">Löschen</string>
+    <string name="title_delete_session">Wirklich löschen`</string>
+    <string name="msg_delete_session">Willst Du wirklich dieses Mal mit allen Still-Zeiten löschen?</string>
     <string name="prefCatBackupRestore">Sichern/Wiederherstellen</string>
     <string name="prefKeyBackup">Sichern</string>
     <string name="prefRestore">Wiederherstellen</string>

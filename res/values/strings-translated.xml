@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="labelDay">Day</string>
+    <string name="labelStartTime">Start Time</string>
+    <string name="labelBreast">Breast</string>
+    <string name="labelTime">Time</string>
+    <string name="menuInsert">Insert</string>
+    <string name="menuEdit">Edit</string>
+    <string name="menuDelete">Delete</string>
+    <string name="title_delete_session">Delete session?</string>
+    <string name="msg_delete_session">Do you really want to delete this session and all its feeding times?</string>
     <string name="prefCatBackupRestore">Backup/Restore</string>
     <string name="prefKeyBackup">Backup</string>
     <string name="prefRestore">Restore</string>
