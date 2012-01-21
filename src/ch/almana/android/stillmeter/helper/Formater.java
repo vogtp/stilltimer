@@ -20,6 +20,10 @@ public class Formater {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(time);
 		StringBuilder sb = new StringBuilder();
+		int h = cal.get(Calendar.HOUR);
+		if (h > 0) {
+			sb.append(h).append(":");
+		}
 		int min = cal.get(Calendar.MINUTE);
 		if (min < 10) {
 			sb.append("0");

@@ -29,10 +29,10 @@
 
     <TableLayout
         android:id="@+id/ttCurTime"
-        android:paddingTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:paddingTop="10dp" >
 
         <TableRow
             android:id="@+id/trLeft"
@@ -100,10 +100,10 @@
         </TableRow>
 
         <TableRow
-            android:paddingTop="10dp"
             android:id="@+id/trLastSession"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp" >
 
             <TextView
                 android:id="@+id/labelLastSession"
@@ -114,6 +114,25 @@
 
             <TextView
                 android:id="@+id/tvLastSession"
+                style="@style/styleLastSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trTimeSinceLastSession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/labelTimeSinceLastSession"
+                style="@style/styleLastSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/labelTimeSinceLastSession" />
+
+            <TextView
+                android:id="@+id/tvTimeSinceLastSession"
                 style="@style/styleLastSession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

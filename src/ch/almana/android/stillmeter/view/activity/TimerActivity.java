@@ -26,6 +26,11 @@ public class TimerActivity extends Activity {
 	private TextView tvLeft;
 	private TextView tvRight;
 	private TextView tvTotal;
+	private TextView tvLastSession;
+	private TextView tvTimeSinceLastSession;
+	private TextView tvLastSessionDuration;
+	private TextView tvLastBreast;
+	private TextView tvLastBreastTime;
 
 	private static SessionModel sessionModel;
 	private static WakeLock wakeLock = null;
@@ -38,10 +43,7 @@ public class TimerActivity extends Activity {
 			updateView();
 		}
 	};
-	private TextView tvLastSession;
-	private TextView tvLastSessionDuration;
-	private TextView tvLastBreast;
-	private TextView tvLastBreastTime;
+	private long lastSessionEndTime;
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -71,6 +73,7 @@ public class TimerActivity extends Activity {
 		tvRight = (TextView) findViewById(R.id.tvRight);
 		tvTotal = (TextView) findViewById(R.id.tvTotal);
 		tvLastSession = (TextView) findViewById(R.id.tvLastSession);
+		tvTimeSinceLastSession = (TextView) findViewById(R.id.tvTimeSinceLastSession);
 		tvLastSessionDuration = (TextView) findViewById(R.id.tvLastSessionDuration);
 		tvLastBreast = (TextView) findViewById(R.id.tvLastBreast);
 		tvLastBreastTime = (TextView) findViewById(R.id.tvLastBreastTime);
@@ -130,6 +133,7 @@ public class TimerActivity extends Activity {
 		updateTextView(tvLeft, l);
 		updateTextView(tvRight, r);
 		updateTextView(tvTotal, t);
+		updateTextView(tvTimeSinceLastSession, System.currentTimeMillis() - lastSessionEndTime);
 		long sessionStartTime = sessionModel.getStartTime();
 		Cursor sessionCursor = null;
 		try {
@@ -138,6 +142,7 @@ public class TimerActivity extends Activity {
 			while (notFound && sessionCursor.moveToNext()) {
 				if (sessionCursor.getLong(Session.INDEX_TIME_START) < sessionStartTime
 						&& sessionCursor.getLong(Session.INDEX_TIME_END) > -1) {
+					lastSessionEndTime = sessionCursor.getLong(Session.INDEX_TIME_END);
 					tvLastSession.setText(Formater.sessionTime(sessionCursor));
 					tvLastSessionDuration.setText(Formater.timeElapsed(sessionCursor.getLong(Session.INDEX_TOTAL_TIME)));
 
