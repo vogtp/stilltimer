@@ -133,7 +133,7 @@ public class TimerActivity extends Activity {
 		long sessionStartTime = sessionModel.getStartTime();
 		Cursor sessionCursor = null;
 		try {
-			sessionCursor = getContentResolver().query(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, null, null, Session.SORTORDER_DEFAULT);
+			sessionCursor = getContentResolver().query(Session.CONTENT_URI, Session.PROJECTION_DEFAULT, Session.SELECTION_ISVALID, null, Session.SORTORDER_DEFAULT);
 			boolean notFound = true;
 			while (notFound && sessionCursor.moveToNext()) {
 				if (sessionCursor.getLong(Session.INDEX_TIME_START) < sessionStartTime

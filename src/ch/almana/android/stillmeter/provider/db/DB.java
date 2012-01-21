@@ -125,6 +125,7 @@ public interface DB {
 		public static final String[] PROJECTION_DEFAULT = colNames;
 
 		public static final String SELECTION_BY_DAY = NAME_DAY + "=? and " + NAME_TIME_END + " > 0";
+		public static final String SELECTION_ISVALID = NAME_TIME_START + " > 0 and " + NAME_TIME_END + " > 0";
 
 		public static final String SORTORDER_DEFAULT = NAME_TIME_START + " DESC";
 
