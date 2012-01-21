@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="labelTimeSinceLastSession">Time since last</string>
     <string name="labelDay">Day</string>
     <string name="labelStartTime">Start Time</string>
     <string name="labelBreast">Breast</string>
