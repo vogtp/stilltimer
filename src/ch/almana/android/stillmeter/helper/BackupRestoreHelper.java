@@ -2,15 +2,15 @@ package ch.almana.android.stillmeter.helper;
 
 import java.io.File;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import ch.almana.android.importexportdb.BackupRestoreCallback;
-import ch.almana.android.importexportdb.ExportConfig;
-import ch.almana.android.importexportdb.ExportConfig.ExportType;
-import ch.almana.android.importexportdb.ExportDataTask;
-import ch.almana.android.importexportdb.importer.DataJsonImporter;
+import ch.almana.android.importexportdb.exporter.ExportConfig;
+import ch.almana.android.importexportdb.exporter.ExportConfig.ExportType;
+import ch.almana.android.importexportdb.exporter.ExportDataTask;
+import ch.almana.android.importexportdb.importer.ImportConfig;
+import ch.almana.android.importexportdb.importer.ImportDataTask;
 import ch.almana.android.stillmeter.log.Logger;
 import ch.almana.android.stillmeter.provider.StillProvider;
 import ch.almana.android.stillmeter.provider.db.DB;
@@ -23,12 +23,10 @@ public class BackupRestoreHelper {
 
 	private final BackupRestoreCallback cb;
 
-	private final ContentResolver contentResolver;
 
 	public BackupRestoreHelper(BackupRestoreCallback cb) {
 		super();
 		this.cb = cb;
-		this.contentResolver = cb.getContext().getContentResolver();
 	}
 
 	public static File getStoragePath(Context ctx) {
@@ -59,19 +57,31 @@ public class BackupRestoreHelper {
 			Logger.i("Restoring...");
 			Context context = cb.getContext();
 			try {
-				StillProvider.setNotifyChanges(false);
-				DataJsonImporter dje = new DataJsonImporter(DB.DATABASE_NAME, getStoragePath(context));
 				StillProvider.deleteAllTables(context);
-				dje.restoreTable(contentResolver, DB.Day.CONTENT_URI, DB.Day.TABLE_NAME);
-				dje.restoreTable(contentResolver, DB.Session.CONTENT_URI, DB.Session.TABLE_NAME);
-				dje.restoreTable(contentResolver, DB.StillTime.CONTENT_URI, DB.StillTime.TABLE_NAME);
-				cb.hasFinished(true);
+				BackupRestoreCallback callback = new BackupRestoreCallback() {
+
+					@Override
+					public void hasFinished(boolean success) {
+						StillProvider.setNotifyChanges(true);
+						cb.hasFinished(success);
+					}
+
+					@Override
+					public Context getContext() {
+						return cb.getContext();
+					}
+				};
+				ImportDataTask idt = new ImportDataTask(callback);
+				ImportConfig config = new ImportConfig(DB.DATABASE_NAME, getStoragePath(context));
+				config.addTable(DB.Day.TABLE_NAME, DB.Day.CONTENT_URI);
+				config.addTable(DB.Session.TABLE_NAME, DB.Session.CONTENT_URI);
+				config.addTable(DB.StillTime.TABLE_NAME, DB.StillTime.CONTENT_URI);
+				StillProvider.setNotifyChanges(false);
+				idt.execute(new ImportConfig[] { config });
 			} catch (Exception e) {
 				Logger.e("Cannot restore configuration", e);
 				cb.hasFinished(false);
 				throw new Exception("Cannot restore configuration", e);
-			} finally {
-				StillProvider.setNotifyChanges(true);
 			}
 		}
 	}

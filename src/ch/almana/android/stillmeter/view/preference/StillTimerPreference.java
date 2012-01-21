@@ -4,7 +4,6 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -22,7 +21,7 @@ import ch.almana.android.stilltimer.R;
 
 public class StillTimerPreference extends PreferenceActivity implements BackupRestoreCallback {
 
-	ProgressDialog progressDialog;
+	//	ProgressDialog progressDialog;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -107,16 +106,16 @@ public class StillTimerPreference extends PreferenceActivity implements BackupRe
 	}
 
 	private void startProgressDialog(CharSequence message) {
-		progressDialog = new ProgressDialog(this);
-		progressDialog.setMessage(message);
-		progressDialog.show();
+		//		progressDialog = new ProgressDialog(this);
+		//		progressDialog.setMessage(message);
+		//		progressDialog.show();
 	}
 
 	@Override
 	public void hasFinished(boolean success) {
-		if (progressDialog != null) {
-			progressDialog.hide();
-		}
+		//		if (progressDialog != null) {
+		//			progressDialog.hide();
+		//		}
 	}
 
 }
