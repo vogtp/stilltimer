@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -28,6 +29,8 @@ public class TimeGraphView extends View {
 	private float lineSep;
 	private float strokeWidth;
 	private Paint timeLabelPaint;
+	private Bitmap bitmap;
+	private Canvas canvas;
 
 	public TimeGraphView(Context context) {
 		super(context);
@@ -76,9 +79,26 @@ public class TimeGraphView extends View {
 	}
 
 	@Override
-	protected void onDraw(Canvas canvas) {
-		int width = canvas.getWidth();
-		int height = canvas.getHeight();
+	protected void onDraw(Canvas c) {
+		if (bitmap == null) {
+			paint(c.getWidth(), c.getHeight());
+		}
+		c.drawBitmap(bitmap, 0, 0, null);
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		bitmap = null;
+		canvas = null;
+		paint(w, h);
+	}
+
+	private void paint(int width, int height) {
+		if (bitmap == null) {
+			bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			canvas = new Canvas(bitmap);
+		}
 		double minInPx = width / DAY_IN_MILLIES;
 		ContentResolver resolver = getContext().getContentResolver();
 		Cursor dayCursor = null;
