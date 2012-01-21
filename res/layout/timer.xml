@@ -100,29 +100,10 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/trLastSession"
+            android:id="@+id/trTimeSinceLastSession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp" >
-
-            <TextView
-                android:id="@+id/labelLastSession"
-                style="@style/styleLastSession"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/labelLastSession" />
-
-            <TextView
-                android:id="@+id/tvLastSession"
-                style="@style/styleLastSession"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/trTimeSinceLastSession"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
 
             <TextView
                 android:id="@+id/labelTimeSinceLastSession"
@@ -133,6 +114,25 @@
 
             <TextView
                 android:id="@+id/tvTimeSinceLastSession"
+                style="@style/styleLastSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trLastSession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/labelLastSession"
+                style="@style/styleLastSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/labelLastSession" />
+
+            <TextView
+                android:id="@+id/tvLastSession"
                 style="@style/styleLastSession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
