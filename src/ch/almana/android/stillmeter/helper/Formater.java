@@ -20,7 +20,7 @@ public class Formater {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(time);
 		StringBuilder sb = new StringBuilder();
-		int h = cal.get(Calendar.HOUR);
+		int h = cal.get(Calendar.HOUR_OF_DAY) - 1;
 		if (h > 0) {
 			sb.append(h).append(":");
 		}
