@@ -12,7 +12,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
-import ch.almana.android.importexportdb.BackupRestoreCallback;
+import ch.almana.android.db.importexport.BackupRestoreCallback;
 import ch.almana.android.stillmeter.helper.BackupRestoreHelper;
 import ch.almana.android.stillmeter.helper.Settings;
 import ch.almana.android.stillmeter.log.Logger;
@@ -86,6 +86,7 @@ public class StillTimerPreference extends PreferenceActivity implements BackupRe
 					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 					}
+
 					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
 						Settings.getInstance(getApplicationContext()).setColor(prefKey, color);

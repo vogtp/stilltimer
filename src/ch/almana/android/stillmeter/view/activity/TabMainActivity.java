@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TabHost;
-import ch.almana.android.importexportdb.BackupRestoreCallback;
+import ch.almana.android.db.importexport.BackupRestoreCallback;
 import ch.almana.android.stillmeter.helper.BackupRestoreHelper;
 import ch.almana.android.stillmeter.provider.db.DB.Session;
 import ch.almana.android.stillmeter.view.preference.StillTimerPreference;
@@ -22,24 +22,23 @@ public class TabMainActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_PROGRESS);
 
-		initTabs();
-	}
-
-	private void initTabs() {
 		final TabHost tabHost = getTabHost();
 		// tabHost.setup();
 
+		Intent timerIntent = new Intent(this, TimerActivity.class);
+		//		timerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		if (savedInstanceState != null) {
+			timerIntent.putExtras(savedInstanceState);
+		}
 		tabHost.addTab(tabHost.newTabSpec("tabCheckin").setIndicator("Timer", getResources().getDrawable(R.drawable.ic_launcher))
-				.setContent(new Intent(this, TimerActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
+				.setContent(timerIntent));
 		tabHost.addTab(tabHost.newTabSpec("tabDays").setIndicator("Days", getResources().getDrawable(R.drawable.tab_day))
 				.setContent(new Intent(this, DaysExpandList.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
 		tabHost.addTab(tabHost.newTabSpec("tabWekk").setIndicator("Graph",
 				getResources().getDrawable(R.drawable.stats))
 				.setContent(new Intent(this, GraphActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
 
-
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

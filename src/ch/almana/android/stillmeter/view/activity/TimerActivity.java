@@ -3,6 +3,8 @@ package ch.almana.android.stillmeter.view.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -61,7 +63,9 @@ public class TimerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timer);
-
+		if (savedInstanceState != null) {
+			sessionModel = new SessionModel(savedInstanceState);
+		}
 		if (sessionModel == null) {
 			sessionModel = new SessionModel(this);
 		}
@@ -119,12 +123,21 @@ public class TimerActivity extends Activity {
 	protected void updateView() {
 		buRight.setText(R.string.right);
 		buLeft.setText(R.string.left);
+		buRight.getBackground().clearColorFilter();
+		buLeft.getBackground().clearColorFilter();
+		Settings settings = Settings.getInstance(this);
 		switch (sessionModel.getPossition()) {
 		case left:
 			buLeft.setText(R.string.buLeftOn);
+			buLeft.getBackground().setColorFilter(settings.getLeftColor(), PorterDuff.Mode.MULTIPLY);
+			buLeft.setTextColor(Color.BLACK);
+			buRight.setTextColor(settings.getRightColor());
 			break;
 		case right:
 			buRight.setText(R.string.buRightOn);
+			buRight.getBackground().setColorFilter(settings.getRightColor(), PorterDuff.Mode.MULTIPLY);
+			buRight.setTextColor(Color.BLACK);
+			buLeft.setTextColor(settings.getLeftColor());
 			break;
 		}
 		long l = sessionModel.getLeftTime();
