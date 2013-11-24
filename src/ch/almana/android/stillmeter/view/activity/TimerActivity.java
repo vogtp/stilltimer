@@ -139,6 +139,11 @@ public class TimerActivity extends Activity {
 			buRight.setTextColor(Color.BLACK);
 			buLeft.setTextColor(settings.getLeftColor());
 			break;
+		default:
+			buRight.setTextColor(settings.getRightColor());
+			buLeft.setTextColor(settings.getLeftColor());
+			break;
+
 		}
 		long l = sessionModel.getLeftTime();
 		long r = sessionModel.getRightTime();
